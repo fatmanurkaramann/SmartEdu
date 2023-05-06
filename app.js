@@ -1,9 +1,10 @@
 const express=require('express')
 const mongoose=require('mongoose')
 const ejs=require('ejs')
-const pageController=require('./controllers/pageController')
 const pageRoute=require('./routes/pageRoute')
 const courseRoute=require('./routes/courseRoute')
+const blogRoute=require('./routes/blogRoute')
+
 
 
 const app =express()
@@ -24,6 +25,8 @@ app.use(express.json())
 
 app.use('/',pageRoute)
 app.use('/courses',courseRoute)
+app.use('/blog',blogRoute)
+
 
 const port=3000
 app.listen(port,()=>{

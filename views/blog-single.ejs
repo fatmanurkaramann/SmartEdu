@@ -1,6 +1,7 @@
 <%- include('partials/_header.ejs') -%>
-	<%- include('partials/_navigation.ejs') -%>
-	
+
+<%- include('partials/_navigation.ejs') -%>
+
 	<div class="all-title-box">
 		<div class="container text-center">
 			<h1>Blog Single<span class="m_1">Lorem Ipsum dolroin gravida nibh vel velit.</span></h1>
@@ -12,7 +13,9 @@
             <div class="row"> 
                 <div class="col-lg-9 blog-post-single">
                     <div class="blog-item">
-						
+						<div class="image-blog">
+							<img src="images/blog_single.jpg" alt="" class="img-fluid">
+						</div>
 						<div class="post-content">
 							<div class="post-date">
 								<span class="day">30</span>
@@ -22,9 +25,6 @@
 								<span><i class="fa fa-calendar"></i> <a href="#">May 11, 2015</a> </span>
 								<span><i class="fa fa-tag"></i>  <a href="#">News</a> </span>
 								<span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span>
-							</div>
-							<div class="image-blog">
-								<img src="/images/blog_1.jpg" alt="" class="img-fluid">
 							</div>
 							<div class="blog-title">
 								<h2><a href="#" title="">perferendis doloribus asperiores.</a></h2>
@@ -49,6 +49,7 @@
 							</p>
 						</div>
 						<div class="author-desc">
+							<img src="images/author.jpg" alt="about author">
 							<ul class="author-social">
 								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -62,6 +63,7 @@
 						<div id="comment-blog">
 							<ul class="comment-list">
 								<li class="comment">
+									<div class="avatar"><img alt="" src="images/avatar-01.jpg" class="avatar"></div>
 									<div class="comment-container">
 										<h5 class="comment-author"><a href="#">John Smith</a></h5>
 										<div class="comment-meta">
@@ -74,6 +76,7 @@
 									</div>
 								</li>
 								<li class="comment">
+									<div class="avatar"><img alt="" src="images/avatar-02.jpg" class="avatar"></div>
 									<div class="comment-container">
 										<h5 class="comment-author"><a href="#">John Smith</a></h5>
 										<div class="comment-meta">
@@ -86,6 +89,7 @@
 									</div>
 									<ul class="children">
 										<li class="comment">
+											<div class="avatar"><img alt="" src="images/avatar-03.jpg" class="avatar"></div>
 											<div class="comment-container">
 												<h5 class="comment-author"><a href="#">Thomas Smith</a></h5>
 												<div class="comment-meta"><a href="#" class="comment-date link-style1">February 14, 2015</a><a class="comment-reply-link link-style3" href="#respond">Reply »</a></div>
@@ -178,13 +182,8 @@
         </div><!-- end container -->
     </div><!-- end section -->
 
-    <div class="parallax section dbcolor">
-        <div class="container">
-           
-        </div><!-- end container -->
-    </div><!-- end section -->
-
 	<%- include('partials/_footer.ejs') -%>
+
 
 </body>
 </html>
