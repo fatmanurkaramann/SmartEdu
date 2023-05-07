@@ -4,6 +4,7 @@ const ejs=require('ejs')
 const pageRoute=require('./routes/pageRoute')
 const courseRoute=require('./routes/courseRoute')
 const blogRoute=require('./routes/blogRoute')
+const categoryRoute=require('./routes/categoryRoute')
 
 
 
@@ -27,6 +28,7 @@ app.use('/',pageRoute)
 app.use('/courses',courseRoute)
 app.use('/blog',blogRoute)
 
+app.use('/categories',categoryRoute)
 
 const port=3000
 app.listen(port,()=>{
