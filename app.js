@@ -5,6 +5,8 @@ const pageRoute=require('./routes/pageRoute')
 const courseRoute=require('./routes/courseRoute')
 const blogRoute=require('./routes/blogRoute')
 const categoryRoute=require('./routes/categoryRoute')
+const userRoute=require('./routes/userRoute')
+
 
 const app =express()
 mongoose.connect('mongodb://localhost/smartedu-db',{
@@ -27,6 +29,9 @@ app.use('/courses',courseRoute)
 app.use('/blog',blogRoute)
 
 app.use('/categories',categoryRoute)
+
+app.use('/user',userRoute)
+
 
 
 const port=3000
