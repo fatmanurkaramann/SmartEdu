@@ -26,8 +26,6 @@ app.set('view engine','ejs')
 
 global.userIn=null
 
-
-
 app.use(
     session({
     secret: 'my_keyboard_cat', // Buradaki texti değiştireceğiz.
