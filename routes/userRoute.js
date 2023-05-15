@@ -6,6 +6,8 @@ const router=express.Router()
 
 router.route('/register').post(authController.createUser)
 router.route('/login').post(authController.loginUser)
+router.route('/logout').get(authController.logoutUser)
+
 
 
 
