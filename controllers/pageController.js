@@ -1,4 +1,5 @@
 exports.getHomePage=(req,res)=>{
+    console.log(req.session.userId)
     res.render('index',{
         page_name:'index'
     })
