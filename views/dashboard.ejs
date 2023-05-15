@@ -1,12 +1,12 @@
 <%- include('partials/_header.ejs') -%>
     <%- include('partials/_navigation.ejs') -%>
-
+<% if(user) { %>
         <div class="all-title-box">
             <div class="container text-center">
                 <h1><%= user.name %><span class="m_1">Lorem Ipsum dolroin gravida nibh vel velit.</span></h1>
             </div>
         </div>
-
+      
         <div id="overviews" class="section wb">
             <div class="container">
                 <div class="section-title row text-center">
@@ -64,3 +64,5 @@
 
             </div><!-- end container -->
         </div><!-- end section -->
+        <%- include('partials/_footer.ejs') -%>
+        <% } %>
