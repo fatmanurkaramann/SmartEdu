@@ -32,10 +32,10 @@
                 </ul>
                 <% if(!userIn) { %>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a class="hover-btn-new log orange mx-2" href="/register"><span>Register</span></a></li>
-                    <li><a class="hover-btn-new log orange" href="/login"><span>Login</span></a></li>
-
+                    <li><a class="hover-btn-new log orange" href="#" data-toggle="modal" data-target="#login"><span>REGISTER/LOGIN</span></a></li>
                 </ul>
+
+                
                 <% } %>
 
                 <% if(userIn) { %> 
@@ -47,6 +47,7 @@
                     <% } %>
             </div>
         </div>
+<!-- Modal -->
 
     </nav>
 </header>
