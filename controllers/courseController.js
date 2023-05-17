@@ -4,7 +4,12 @@ const Category = require('../models/Category')
 exports.createCourse = async (req, res) => {
 
     try {
-        await Course.create(req.body)
+        await Course.create({
+            name: req.body.name,
+            description: req.body.description,
+            category: req.body.category,
+            user: req.session.userId
+        })
         res.status('201').redirect('/courses')
     } catch (error) {
         res.status('400').json({
@@ -19,7 +24,7 @@ exports.getAllCourses = async (req, res) => {
     try {
 
         const categorySlug = req.query.categories
-        const category =await Category.findOne({ slug: categorySlug })
+        const category = await Category.findOne({ slug: categorySlug })
 
         let filter = {}
         if (categorySlug) {
@@ -45,11 +50,10 @@ exports.getAllCourses = async (req, res) => {
 exports.getCourse = async (req, res) => {
 
     try {
-        const course = await Course.findOne({ slug: req.params.slug })
-
+        const course = await Course.findOne({ slug: req.params.slug }).populate('user')
         res.status('200').render('course-detail', {
             course,
-            page_name: 'course-grid-2'
+            page_name: 'course-detail'
         })
     } catch (error) {
         res.status('400').json({

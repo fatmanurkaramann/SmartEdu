@@ -22,10 +22,11 @@
                     <hr class="invis">
 
                     <div class="row">
+                      <% if(user.role!='student') { %>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCourseModal">
                             Create Course
                           </button>
-                          
+                          <% } %>
                           <!-- Modal -->
                           <div class="modal fade" id="addCourseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -43,7 +44,6 @@
                                       <input type="text" class="form-control" name="name"  placeholder="Enter course name">
                                     </div>
                                     <div class="form-group">
-                                      <label for="course-name">Course Name</label>
                                       <input type="hidden" class="form-control" name="role"  value="<%= user.role %>">
                                     </div>
                                     <div class="form-group">
@@ -69,8 +69,8 @@
                           </div>
                         <div class="blog-author">
                             <div class="author-bio">
-                                <h3 class="author_name"><a href="#">Tom Jobs</a></h3>
-                                <h5>CEO at <a href="#">SmartEDU</a></h5>
+                                <h3 class="author_name"><a href="#"><%= user.name %></a></h3>
+                                <h5><%= user.role %> at <a href="#">SmartEDU</a></h5>
                                 <p class="author_det">
                                     Lorem ipsum dolor sit amet, consectetur adip, sed do eiusmod tempor incididunt ut
                                     aut reiciendise voluptat maiores alias consequaturs aut perferendis doloribus omnis
@@ -86,32 +86,23 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col mt-3">
+                        <% for(let i=0; i < courses.length;i++) { %>
+                        <div class="col-6 mt-3">
                             <div class="course-item">
 
                                 <div class="course-br">
-                                    <div class="course-title">Engineering
+                                    <div class="course-title"><a href="/courses/<%= courses[i].slug %>"><%= courses[i].name %></a>
                                     </div>
-                                    <div class="course-desc">
+                                    <div class="course-desc"><%= courses[i].description %>
                                     </div>
 
                                 </div>
                             </div>
 
                         </div><!-- end col -->
-                        <div class="col mt-3">
-                            <div class="course-item">
+                        <% } %>
 
-                                <div class="course-br">
-                                    <div class="course-title">Engineering
-                                    </div>
-                                    <div class="course-desc">
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div><!-- end col -->
+                 
                     </div><!-- end row -->
 
 
