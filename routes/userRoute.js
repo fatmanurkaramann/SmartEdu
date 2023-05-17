@@ -7,5 +7,4 @@ const router = express.Router()
 router.route('/logout').get(authController.logoutUser)
 router.route('/dashboard').get(authMiddleware, authController.getDashboardPage)
 
-
 module.exports = router

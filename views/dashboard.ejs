@@ -1,129 +1,145 @@
 <%- include('partials/_header.ejs') -%>
-    <%- include('partials/_navigation.ejs') -%>
-        <% if(user) { %>
+  <%- include('partials/_navigation.ejs') -%>
+    <% if(user) { %>
 
 
-            <div class="all-title-box">
-                <div class="container text-center">
-                    <h1>
-                        <%= user.name %><span class="m_1" style="text-transform: uppercase;">
-                                <%= user.role %>
-                            </span>
-                    </h1>
-                </div>
-            </div>
+      <div class="all-title-box">
+        <div class="container text-center">
+          <h1>
+            <%= user.name %><span class="m_1" style="text-transform: uppercase;">
+                <%= user.role %>
+              </span>
+          </h1>
+        </div>
+      </div>
 
-            <div id="overviews" class="section wb">
-                <div class="container">
-                    <div class="section-title row text-center">
+      <div id="overviews" class="section wb">
+        <div class="container">
+          <div class="section-title row text-center">
 
-                    </div><!-- end title -->
+          </div><!-- end title -->
 
-                    <hr class="invis">
+          <hr class="invis">
 
-                    <div class="row">
-                      <% if(user.role!='student') { %>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCourseModal">
-                            Create Course
-                          </button>
-                          <% } %>
-                          <!-- Modal -->
-                          <div class="modal fade" id="addCourseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalLabel">Create Course</h5>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                <div class="modal-body">
-                                  <form method="post" action="/courses" class="form-horizantal">
-                                    <div class="form-group">
-                                      <label for="course-name">Course Name</label>
-                                      <input type="text" class="form-control" name="name"  placeholder="Enter course name">
-                                    </div>
-                                    <div class="form-group">
-                                      <input type="hidden" class="form-control" name="role"  value="<%= user.role %>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="course-name">Category</label>
-                                    <select class="form-control" name="category">
-                                      <% for(let i=0; i < categories.length;i++) { %>
-                                        <option value="<%= categories[i]._id %>"><%= categories[i].name %></option>
-                                        <% } %>
-                                    </select>
-                                      </div>
-                                    <div class="form-group">
-                                      <label for="course-description">Course Description</label>
-                                      <textarea class="form-control"  name="description" rows="3" placeholder="Enter course description"></textarea>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                      <button type="submit" class="btn btn-primary">Create</button>
-                                    </div>
-                                  </form>
-                                </div>
-                              </div>
-                            </div>
+          <div class="row">
+            <% if(user.role!='student' ) { %>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCourseModal">
+                Create Course
+              </button>
+              <% } %>
+                <!-- Modal -->
+                <div class="modal fade" id="addCourseModal" tabindex="-1" role="dialog"
+                  aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Create Course</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form method="post" action="/courses" class="form-horizantal">
+                          <div class="form-group">
+                            <label for="course-name">Course Name</label>
+                            <input type="text" class="form-control" name="name" placeholder="Enter course name">
                           </div>
-                        <div class="blog-author">
-                            <div class="author-bio">
-                                <h3 class="author_name"><a href="#"><%= user.name %></a></h3>
-                                <h5><%= user.role %> at <a href="#">SmartEDU</a></h5>
-                                <p class="author_det">
-                                    Lorem ipsum dolor sit amet, consectetur adip, sed do eiusmod tempor incididunt ut
-                                    aut reiciendise voluptat maiores alias consequaturs aut perferendis doloribus omnis
-                                    saperet docendi nec, eos ea alii molestiae aliquand.
-                                </p>
-                            </div>
-                            <div class="author-desc">
-                                <img src="images/author.jpg" alt="about author">
-                                <ul class="author-social">
-                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-skype"></i></a></li>
-                                </ul>
-                            </div>
+                          <div class="form-group">
+                            <input type="hidden" class="form-control" name="role" value="<%= user.role %>">
+                          </div>
+                          <div class="form-group">
+                            <label for="course-name">Category</label>
+                            <select class="form-control" name="category">
+                              <% for(let i=0; i < categories.length;i++) { %>
+                                <option value="<%= categories[i]._id %>">
+                                  <%= categories[i].name %>
+                                </option>
+                                <% } %>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="course-description">Course Description</label>
+                            <textarea class="form-control" name="description" rows="3"
+                              placeholder="Enter course description"></textarea>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Create</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="blog-author">
+                  <div class="author-bio">
+                    <h3 class="author_name"><a href="#">
+                        <%= user.name %>
+                      </a></h3>
+                    <h5>
+                      <%= user.role %> at <a href="#">SmartEDU</a>
+                    </h5>
+                    <p class="author_det">
+                      Lorem ipsum dolor sit amet, consectetur adip, sed do eiusmod tempor incididunt ut
+                      aut reiciendise voluptat maiores alias consequaturs aut perferendis doloribus omnis
+                      saperet docendi nec, eos ea alii molestiae aliquand.
+                    </p>
+                  </div>
+                  <div class="author-desc">
+                    <img src="images/author.jpg" alt="about author">
+                    <ul class="author-social">
+                      <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                      <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                      <li><a href="#"><i class="fa fa-skype"></i></a></li>
+                    </ul>
+                  </div>
+                </div>
+                <% for(let i=0; i < courses.length;i++) { %>
+                  <div class="col-6 mt-3">
+                    <div class="course-item">
+
+                      <div class="course-br">
+                        <div class="course-title"><a href="/courses/<%= courses[i].slug %>">
+                            <%= courses[i].name %>
+                          </a>
                         </div>
-                        <% for(let i=0; i < courses.length;i++) { %>
+                        <div class="course-desc">
+                          <%= courses[i].description %>
+                        </div>
+
+                      </div>
+                    </div>
+
+                  </div><!-- end col -->
+                  <% } %>
+                    <% if(user.role=='student' ) { %>
+                      <% for(let i=0; i < user.courses.length;i++) { %>
                         <div class="col-6 mt-3">
-                            <div class="course-item">
+                          <div class="course-item">
 
-                                <div class="course-br">
-                                    <div class="course-title"><a href="/courses/<%= courses[i].slug %>"><%= courses[i].name %></a>
-                                    </div>
-                                    <div class="course-desc"><%= courses[i].description %>
-                                    </div>
-
-                                </div>
+                            <div class="course-br">
+                              <div class="course-title"><a>
+                                  <%= user.courses[i].name %>
+                                </a>
+                              </div>
+                              <div class="course-desc">
+                                <%= user.courses[i].description %>
+                              </div>
+                              <form method="post" action="/courses/release">
+                                <input type="hidden" name="course_id" value="<%= user.courses[i]._id %>">
+                                <button class="btn btn-danger btn-radius ">Release Course</button>
+                              </form>
                             </div>
+
+                          </div>
 
                         </div><!-- end col -->
                         <% } %>
-                        <% if(user.role=='student') { %>
-                        <% for(let i=0; i < user.courses.length;i++) { %>
-                          <div class="col-6 mt-3">
-                              <div class="course-item">
-  
-                                  <div class="course-br">
-                                      <div class="course-title"><a><%= user.courses[i].name %></a>
-                                      </div>
-                                      <div class="course-desc"><%= user.courses[i].description %>
-                                      </div>
-  
-                                  </div>
-                              </div>
-  
-                          </div><!-- end col -->
                           <% } %>
-                          <% } %>
-                    </div><!-- end row -->
+          </div><!-- end row -->
 
 
-                </div><!-- end container -->
-            </div><!-- end section -->
-            <%- include('partials/_footer.ejs') -%>
-                <% } %>
-
-                
+        </div><!-- end container -->
+      </div><!-- end section -->
+      <%- include('partials/_footer.ejs') -%>
+        <% } %>

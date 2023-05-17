@@ -2,53 +2,61 @@
     <%- include('partials/_navigation.ejs') -%>
 
 
-        <div id="overviews" class="section wb" >
+        <div id="overviews" class="section wb">
             <div class="container" style="width: 50%;">
                 <div class="row" style="align-items: center;justify-content: center;">
-                    <div class="col"  style="bottom: 30px;">
+                    <div class="col" style="bottom: 30px;">
                         <div class="course-item">
 
                             <div class="post-content">
-                                <form method="post" action="/courses/enroll">
-                                    <input class="hidden" name="course_id" value="<%= course._id %>">
-                                    <button  class="btn btn-light btn-radius btn-brd grd1" >Enroll Course</button>
-                                </form>
-                             
-                                <div class="meta-info-blog">
-                                    <span><i class="fa fa-calendar"></i> <a href="#"><%= course.createdDate.toLocaleString() %></a> </span>
-                                </div>
-                                <div class="image-blog">
-                                    <img src="/images/blog_1.jpg" alt="" class="img-fluid">
-                                </div>
-                                <div class="blog-title">
-                                    <h2><a href="#" title="">
-                                            <%= course.name %>
-                                        </a></h2>
-                                </div>
-                                <div class="blog-desc">
-                                    <p><%= course.description %> </p>
-                                   
-                                </div>
+                                <% if(user && user.role=='student') { %>
+                                    <form method="post" action="/courses/enroll">
+                                        <input type="hidden" name="course_id" value="<%= course._id %>">
+                                        <button class="btn btn-light btn-radius btn-brd grd1" <% if
+                                            (user.courses.includes(course._id)) { %>disabled<% } %>>Enroll
+                                                Course</button>
+                                    </form>
+                                    <% } %>
+                                        <div class="meta-info-blog">
+                                            <span><i class="fa fa-calendar"></i> <a href="#">
+                                                    <%= course.createdDate.toLocaleString() %>
+                                                </a> </span>
+                                        </div>
+                                        <div class="image-blog">
+                                            <img src="/images/blog_1.jpg" alt="" class="img-fluid">
+                                        </div>
+                                        <div class="blog-title">
+                                            <h2><a href="#" title="">
+                                                    <%= course.name %>
+                                                </a></h2>
+                                        </div>
+                                        <div class="blog-desc">
+                                            <p>
+                                                <%= course.description %>
+                                            </p>
+
+                                        </div>
                             </div>
+
                         </div>
-
-
-
-
 
 
                     </div><!-- end col -->
                 </div>
                 <div class="blog-author">
                     <div class="author-bio">
-                        <h3 class="author_name"><a href="#"><%= course.user.name %></a></h3>
-                        <h5><%= course.user.role %> at <a href="#">SmartEDU</a></h5>
+                        <h3 class="author_name"><a href="#">
+                                <%= course.user?.name %>
+                            </a></h3>
+                        <h5>
+                            <%= course.user?.role %> at <a href="#">SmartEDU</a>
+                        </h5>
                     </div>
                     <div class="author-desc">
                         <img src="images/author.jpg" alt="about author">
                     </div>
                 </div>
             </div>
-         
+
         </div>
         <%- include('partials/_footer.ejs') -%>
