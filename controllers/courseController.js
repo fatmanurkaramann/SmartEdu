@@ -24,7 +24,7 @@ exports.createCourse = async (req, res) => {
 exports.getAllCourses = async (req, res) => {
 
     try {
-
+        const searchQuery = req.query.search
         const categorySlug = req.query.categories
         const category = await Category.findOne({ slug: categorySlug })
 
@@ -32,13 +32,26 @@ exports.getAllCourses = async (req, res) => {
         if (categorySlug) {
             filter = { category: category._id }
         }
-        const courses = await Course.find(filter).sort('-createdDate')
+        if (searchQuery) {
+            filter = { name: searchQuery }
+        }
+        if(!categorySlug && !searchQuery){
+            filter.name=''
+            filter.category=null
+        }
+        const courses = await Course.find({
+            $or:[
+                {name:{$regex: '.*'+ filter.name+'.*',$options:'i'}},
+                {category:filter.category}
+            ]
+        }).sort('-createdDate').populate('user')
         const categories = await Category.find()
 
 
         res.status('200').render('course-grid-2', {
             courses,
             categories,
+            searchQuery,
             page_name: 'course-grid-2'
         })
     } catch (error) {
@@ -83,7 +96,7 @@ exports.enrollCourse = async (req, res) => {
     }
 }
 
-exports.releaseCourse=async(req,res)=>{
+exports.releaseCourse = async (req, res) => {
     try {
         const user = await User.findById(req.session.userId);
         await user.courses.pull({ _id: req.body.course_id });

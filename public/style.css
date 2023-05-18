@@ -3747,20 +3747,23 @@ a.link-style3 {
 	display: inline-block;
 	width: 100%;
 }
+
 #site-searchform .form-control{
+    display: inline-block;
 	border: 1px solid #eee;
 	background-color: #fff;
-	width: 82%;
+	width: 80%;
+    line-height: 100;
 	height: 41px;
-	padding: 5px 10px 5px 10px;
 	color: #999;
-	float: left;
 	border-radius: 0;
+    vertical-align: middle;
 }
 #site-searchform #searchsubmit {
-    float: left;
+    display: inline-block;
     width: 18%;
     height: 41px;
+    vertical-align: middle;
     cursor: pointer;
     text-indent: -5555em;
     line-height: 100;
