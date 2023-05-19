@@ -1,4 +1,4 @@
-const nodemailler = require('nodemailer')
+const nodemailer = require('nodemailer')
 
 exports.getHomePage = (req, res) => {
     console.log(req.session.userId)
@@ -31,31 +31,50 @@ exports.getContactPage = (req, res) => {
 }
 
 exports.sendEmail =async (req, res) => {
+    const name = req.body.name;
+    const email = req.body.email;
+    const message = req.body.messages;
+    
+    // Check if the email field is empty
+    if (!email && !name && !message) {
+      console.log("Email field cannot be empty.");
+      res.redirect('/contact'); // Redirect the user back to the contact page
+      return; // Exit the function to prevent sending the email
+    }
+    
     const outputMessage = `
     <h1>Message Details</h1>
     <ul>
-    <li>Name: ${req.body.name}</li>
-    <li>email: ${req.body.email}</li>
+    <li>Name: ${name}</li>
+    <li>Email: ${email}</li>
     </ul>
     <h1>Message</h1>
-    <p>${req.body.messages}</p> `
-    let transporter = nodemailler.createTransport({
-        host: "smtp.gmail.com",
-        port: 465,
-        secure: true, // true for 465, false for other ports
-        auth: {
-            user: "fatmanurkaraman74@gmail.com", // gmail hesabı
-            pass: "inbugkmaryubddgb", // gmail şifresi veya uygulama şifresi
-        },
+    <p>${message}</p>`;
+    
+    let transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      auth: {
+        user: "fatmanurkaraman74@gmail.com",
+        pass: "inbugkmaryubddgb",
+      },
     });
-
-    let info = await transporter.sendMail({
-        from: '"Fred Foo 👻" <fatmanurkaraman74@gmail.com>', // sender address
-        to: "fatmanur.karaman@outlook.com", // list of receivers
-        subject: "SMART EDU", // Subject line
-        text: "Smart Edu", // plain text body
-        html: outputMessage, // html body
+    
+    try {
+      let info = await transporter.sendMail({
+        from: '"Fred Foo 👻" <fatmanurkaraman74@gmail.com>',
+        to: "fatmanur.karaman@outlook.com",
+        subject: "SMART EDU",
+        text: "Smart Edu",
+        html: outputMessage,
       });
-    console.log(req.body)
-    res.redirect('/contact')
+      console.log(req.body);
+      req.flash('success','We received your message succesfully')
+      res.redirect('/contact');
+    } catch (error) {
+      req.flash('error','Something happened wrong.')
+
+      res.redirect('/contact');
+    }
 }
