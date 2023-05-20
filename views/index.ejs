@@ -2,7 +2,18 @@
 	<!-- END LOADER -->	
 <%- include('partials/_navigation.ejs') -%>
 	
-	
+<% if(flashMessages) { %>
+    <% if(flashMessages.success) { %>
+        <div class="alert alert-success">
+            <%= flashMessages.success %>
+        </div>
+        <% } else if(flashMessages.error) { %>
+        <div class="alert alert-danger">
+            <%= flashMessages.error %>
+        </div>
+        <% } %>
+
+            <% } %>
 	<div id="carouselExampleControls" class="carousel slide bs-slider box-slider" data-ride="carousel" data-pause="hover" data-interval="false" >
 		<!-- Indicators -->
 		<ol class="carousel-indicators">
