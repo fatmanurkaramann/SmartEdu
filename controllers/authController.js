@@ -14,11 +14,11 @@ exports.createUser = async (req, res) => {
 
     } catch (error) {
         const errors = validationResult(req)
-        console.log(errors.array().map(e=>e.msg))
-      
-        for (let i = 0; i <errors.array().length; i++) {
+        console.log(errors.array().map(e => e.msg))
+
+        for (let i = 0; i < errors.array().length; i++) {
             req.flash("error", `${errors.array()[i].msg}`);
-          }
+        }
         res.redirect('/')
 
     }
@@ -30,10 +30,19 @@ exports.loginUser = async (req, res) => {
         const user = await User.findOne({ email })
         if (user) {
             bcrypt.compare(password, user.password, (err, same) => {
-                // USER SESSION
-                req.session.userId = user._id
-                res.status(200).redirect('/user/dashboard');
+
+                if (same) {
+                    // USER SESSION
+                    req.session.userId = user._id
+                    res.status(200).redirect('/user/dashboard');
+                } else {
+                    req.flash("error", 'Your password is not correct!');
+                    res.redirect('/')
+                }
             });
+        } else {
+            req.flash("error", 'User is not exist!');
+            res.redirect('/')
         }
 
     } catch (error) {
@@ -48,7 +57,6 @@ exports.logoutUser = (req, res) => {
         res.redirect('/');
     })
 }
-
 
 exports.getDashboardPage = async (req, res) => {
     const user = await User.findOne({ _id: req.session.userId }).populate('courses')
