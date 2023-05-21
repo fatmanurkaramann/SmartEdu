@@ -8,6 +8,9 @@ const CourseSchema = new Schema({
         unique: true,
         required: true
     },
+    image:{
+        type:String
+    },
     description: {
         type: String,
         required: true,
@@ -28,7 +31,8 @@ const CourseSchema = new Schema({
     user:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User'
-    }
+    },
+    
 })
 
 CourseSchema.pre('validate',function(next){

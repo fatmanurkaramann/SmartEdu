@@ -56,7 +56,7 @@
                                   </button>
                                 </div>
                                 <div class="modal-body">
-                                  <form method="post" action="/courses" class="form-horizantal">
+                                  <form method="post" action="/courses" encType="multipart/form-data" class="form-horizantal">
                                     <div class="form-group">
                                       <label for="course-name">Course Name</label>
                                       <input type="text" class="form-control" name="name"
@@ -80,6 +80,10 @@
                                       <textarea class="form-control" name="description" rows="3"
                                         placeholder="Enter course description"></textarea>
                                     </div>
+                                    <div class="form-group">
+                                      <label for="myfile">Select files:</label>
+                                      <input type="file" name="image" id="myfile">
+                                  </div>
                                     <div class="modal-footer">
                                       <button type="button" class="btn btn-secondary"
                                         data-dismiss="modal">Close</button>

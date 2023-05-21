@@ -1,19 +1,32 @@
 const Course = require('../models/Course')
 const Category = require('../models/Category')
 const User = require('../models/User')
-
+const fs = require('fs')
 
 exports.createCourse = async (req, res) => {
 
     try {
-        await Course.create({
-            name: req.body.name,
-            description: req.body.description,
-            category: req.body.category,
-            user: req.session.userId
+        const uploadDir = 'public/uploads'
+        if (!fs.existsSync(uploadDir)) {
+            fs.mkdirSync(uploadDir)
+        }
+        let uploadedImage = req.files.image
+        let uploadPath = __dirname + '/../public/uploads/' + uploadedImage.name
+
+        uploadedImage.mv(uploadPath,
+            async ()=>{
+                await Course.create({
+                    name: req.body.name,
+                    description: req.body.description,
+                    category: req.body.category,
+                    user: req.session.userId,
+                    image: '/uploads/' + uploadedImage.name
+                })
         })
+     
         res.status('201').redirect('/courses')
     } catch (error) {
+        console.log(error)
         res.status('400').json({
             status: 'fail',
             error
@@ -127,12 +140,20 @@ exports.deleteCourse = async (req, res) => {
 }
 exports.updateCourse = async (req, res) => {
     try {
-        const course = await Course.findOne({ slug: req.params.slug });
-        course.name = req.body.name;
-        course.description = req.body.description;
-        course.category = req.body.category;
+        // const course = await Course.findOne({ slug: req.params.slug });
+        // course.name = req.body.name;
+        // course.description = req.body.description;
+        // course.category = req.body.category;
 
-        course.save();
+        // course.save();
+
+        const course = await Course.findOne({ slug: req.params.slug })
+        await Course.findByIdAndUpdate(course, {
+            name :req.body.name,
+            description :req.body.description,
+            category : req.body.category
+        })
+        course.save()
 
         res.status(200).redirect('/user/dashboard');
 

@@ -3862,13 +3862,18 @@ a.link-style3 {
 	color: #eea412;
 }
 .course-br{
-	border: 1px solid #4babb1;
+    background-color: #EEEEEE;
+    border-top-left-radius: 10px; 
+    border-top-right-radius: 10px; 
+
 	padding: 15px;
 }
 .course-meta-bot{
-	border: 1px solid #4babb1;
-	border-top: 0px;
+    background-color: #EEEEEE;
+	border-top: 1px solid #4babb1;
 	padding: 15px;
+    border-end-end-radius: 10px; 
+    border-bottom-left-radius: 10px;
 }
 .course-meta-bot ul{
 	padding: 0px;

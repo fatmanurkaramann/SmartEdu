@@ -1,5 +1,7 @@
 const express = require('express')
+const serverless = require('serverless-http')
 const mongoose = require('mongoose')
+const fileUpload = require('express-fileupload');
 const flash = require('connect-flash');
 const session = require('express-session')
 const MongoStore = require('connect-mongo');
@@ -10,7 +12,7 @@ const courseRoute = require('./routes/courseRoute')
 const blogRoute = require('./routes/blogRoute')
 const categoryRoute = require('./routes/categoryRoute')
 const userRoute = require('./routes/userRoute')
-
+const router = express.Router()
 const app = express()
 mongoose.connect('mongodb://localhost/smartedu-db', {
     useNewUrlParser: true,
@@ -39,6 +41,7 @@ app.use(flash())
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+app.use(fileUpload());
 app.use('*', (req, res, next) => {
     userIn = req.session.userId;
     next();
@@ -58,6 +61,8 @@ app.use('/blog', blogRoute)
 app.use('/categories', categoryRoute)
 app.use('/user', userRoute)
 
+app.use('./netlify/functions/api',router)
+module.exports.handler=serverless(app)
 const port = 3000
 app.listen(port, () => {
     console.log('3000 portunda başladı')
