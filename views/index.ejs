@@ -95,7 +95,33 @@
 			</a>
 		</div>
 	</div>
-	
+	<div id="overviews" class="section wb">
+        <div class="container">
+            <div class="section-title row text-center">
+                <div class="col-md-8 offset-md-2">
+                    <h3>About</h3>
+                    <p class="lead">Lorem Ipsum dolroin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem!</p>
+                </div>
+            </div><!-- end title -->
+            <% for(let i=0; i < course.length;i++) { %>
+            <div class="row align-items-center">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                    <div class="message-box">
+                        <h4><%= course[i].name %></h4>
+                        <h2><%= course[i].description %></h2>
+                        <a href="/courses/<%= course[0].slug %>" class="hover-btn-new orange"><span>Learn More</span></a>
+                    </div><!-- end messagebox -->
+                </div><!-- end col -->
+				
+				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                    <div class="post-media wow fadeIn">
+                        <img src="images/about_02.jpg" alt="" class="img-fluid img-rounded">
+                    </div><!-- end media -->
+                </div><!-- end col -->
+			</div>
+            <% } %>
+        </div><!-- end container -->
+    </div>
     
     <section class="section lb page-section">
 		<div class="container">
@@ -175,19 +201,19 @@
 			<div class="row text-left stat-wrap">
 				<div class="col-md-4 col-sm-4 col-xs-12">
 					<span data-scroll class="global-radius icon_wrap effect-1 alignleft"><i class="flaticon-study"></i></span>
-					<p class="stat_count">12000</p>
+					<p class="stat_count"><%= totalStudents %></p>
 					<h3>Students</h3>
 				</div><!-- end col -->
 
 				<div class="col-md-4 col-sm-4 col-xs-12">
 					<span data-scroll class="global-radius icon_wrap effect-1 alignleft"><i class="flaticon-online"></i></span>
-					<p class="stat_count">240</p>
+					<p class="stat_count"><%= totalCourse %></p>
 					<h3>Courses</h3>
 				</div><!-- end col -->
 
 				<div class="col-md-4 col-sm-4 col-xs-12">
 					<span data-scroll class="global-radius icon_wrap effect-1 alignleft"><i class="flaticon-years"></i></span>
-					<p class="stat_count">55</p>
+					<p class="stat_count"><%= totalTeachers %></p>
 					<h3>Years Completed</h3>
 				</div><!-- end col -->
 			</div><!-- end row -->
