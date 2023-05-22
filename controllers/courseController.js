@@ -2,7 +2,7 @@ const Course = require('../models/Course')
 const Category = require('../models/Category')
 const User = require('../models/User')
 const fs = require('fs')
-
+const Swal = require('sweetalert2');
 exports.createCourse = async (req, res) => {
 
     try {
@@ -23,7 +23,7 @@ exports.createCourse = async (req, res) => {
                     image: '/uploads/' + uploadedImage.name
                 })
         })
-     
+        req.flash('success', 'Course added succesfully')
         res.status('201').redirect('/courses')
     } catch (error) {
         console.log(error)

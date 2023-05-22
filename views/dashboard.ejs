@@ -12,21 +12,22 @@
           </h1>
         </div>
       </div>
+      <% if(flashMessages) { %>
+        <% if(flashMessages.success) { %>
+          
+          <div class="alert alert-success">
+            <%= flashMessages.success %>
+          </div>
+          <% } else if(flashMessages.error) { %>
+            <div class="alert alert-danger">
+              <%= flashMessages.error %>
+            </div>
+            <% } %>
 
+              <% } %>
       <div id="overviews" class="section wb">
         <div class="container">
-          <% if(flashMessages) { %>
-            <% if(flashMessages.success) { %>
-              <div class="alert alert-success">
-                <%= flashMessages.success %>
-              </div>
-              <% } else if(flashMessages.error) { %>
-                <div class="alert alert-danger">
-                  <%= flashMessages.error %>
-                </div>
-                <% } %>
-
-                  <% } %>
+        
                     <div class="section-title row text-center">
 
                     </div><!-- end title -->
@@ -326,3 +327,4 @@
           <% } %>
 
             <%- include('partials/_footer.ejs') -%>
+            
