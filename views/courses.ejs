@@ -1,9 +1,9 @@
 <%- include('partials/_header.ejs') -%>
 	<%- include('partials/_navigation.ejs') -%>
-	
+
 		<div class="all-title-box">
 			<div class="container text-center">
-				<h1>Course Grid 2<span class="m_1">Lorem Ipsum dolroin gravida nibh vel velit.</span></h1>
+				<h1>Courses<span class="m_1">Lorem Ipsum dolroin gravida nibh vel velit.</span></h1>
 			</div>
 		</div>
 
@@ -12,106 +12,103 @@
 				<% if(flashMessages) { %>
 					<% if(flashMessages.success) { %>
 						<div class="alert" id="success-alert">
-							<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-							<strong>Success!</strong> <%= flashMessages.success %>
-						  </div>
-						<% } else if(flashMessages.error) { %>
-						<div class="alert alert-danger">
-							<%= flashMessages.error %>
+							<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+							<strong>Success!</strong>
+							<%= flashMessages.success %>
 						</div>
-						<% } %>
-				
-							<% } %>
-				<div class="widget-search" style="width: 50%;">
-					<div class="site-search-area">
-						<form method="get" id="site-searchform" action="/courses">
-							<div>
-								<input class="input-text form-control" name="search" id="search-k"
-									placeholder="Search..." type="text" value="<%= searchQuery %>">
-								<button id="searchsubmit" value="Search" type="submit"></button>
+						<% } else if(flashMessages.error) { %>
+							<div class="alert alert-danger">
+								<%= flashMessages.error %>
 							</div>
-						</form>
-					</div>
-				</div>
-				<div class="row">
-			
-					<div class="col-lg-9">
-						<div class="row align-items-stretch">
-							<% for(let i=0;i< courses.length; i++) { %>
-								<div class="col-md-6 mt-3" >
-									<div class="course-item">
+							<% } %>
 
-										<div class="course-br" >
-											<div class="image-blog">
-												<img src="<%= courses[i].image %>" alt="Image" 
-													class="img-fluid tm-catalog-item-img">
-											</div>
-											<div class="course-title">
-												<h2><a href="/courses/<%= courses[i].slug %>" title="">
-														<%= courses[i].name %>
-													</a></h2>
-											</div>
-											<div class="course-desc">
-												<p>
-													<%= courses[i].description.substring(0,100) + '...' %>
-												</p>
-											</div>
-											<div class="course-rating">
-												4.5
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star-half"></i>
-											</div>
-										</div>
-										<div class="course-meta-bot">
-											<ul>
-												<li><i class="fa fa-user" aria-hidden="true"></i>
-													<%= courses[i]?.user?.name %>
-												</li>
-												<li><i class="fa fa-users" aria-hidden="true"></i> 56 Student</li>
-												<li><i class="fa fa-book" aria-hidden="true"></i> 7 Books</li>
-											</ul>
+								<% } %>
+									<div class="widget-search" style="width: 50%;">
+										<div class="site-search-area">
+											<form method="get" id="site-searchform" action="/courses">
+												<div>
+													<input class="input-text form-control" name="search" id="search-k"
+														placeholder="Search..." type="text" value="<%= searchQuery %>">
+													<button id="searchsubmit" value="Search" type="submit"></button>
+												</div>
+											</form>
 										</div>
 									</div>
-								</div><!-- end col -->
-								<% } %>
-						</div><!-- end row -->
-					</div><!-- end col-lg-9 -->
+									<div class="row">
 
-					<div class="col-lg-3" style="max-width: 135%;">
-						<div class="widget-categories">
-							<h3 class="widget-title text-center">Categories</h3>
-							<ul>
-								<% for(let i=0;i< categories.length; i++) { %>
-									<li><a href="/courses?categories=<%= categories[i].slug %>">
-											<%= categories[i].name %>
-										</a></li>
-									<% } %>
-							</ul>
-						</div>
-						<div class="widget-tags">
-							<h3 class="widget-title">Search Tags</h3>
-							<ul class="tags">
-								<li><a href="#"><b>business</b></a></li>
-								<li><a href="#"><b>jquery</b></a></li>
-								<li><a href="#">corporate</a></li>
-								<li><a href="#">portfolio</a></li>
-								<li><a href="#">css3</a></li>
-								<li><a href="#"><b>theme</b></a></li>
-								<li><a href="#"><b>html5</b></a></li>
-								<li><a href="#"><b>mysql</b>
-										</b></a></li>
-								<li><a href="#">multipurpose</a></li>
-								<li><a href="#">responsive</a></li>
-								<li><a href="#">premium</a></li>
-								<li><a href="#">javascript</a></li>
-								<li><a href="#"><b>Best jQuery</b></a></li>
-							</ul>
-						</div>
-					</div><!-- end col-lg-3 -->
-				</div><!-- end row -->
+										<div class="col-lg-9">
+											<div class="row align-items-stretch">
+												<% for(let i=0;i< courses.length; i++) { %>
+													<div class="col-md-6 mt-3">
+														<div class="course-item">
+
+															<div class="course-br">
+																<div class="image-blog">
+																	<img src="<%= courses[i].image %>" alt="Image"
+																		class="img-fluid tm-catalog-item-img">
+																</div>
+																<div class="course-title">
+																	<h2><a href="/courses/<%= courses[i].slug %>"
+																			title="">
+																			<%= courses[i].name %>
+																		</a></h2>
+																</div>
+																<div class="course-desc">
+																	<p>
+																		<%= courses[i].description.substring(0,100)
+																			+ '...' %>
+																	</p>
+																</div>
+																<div class="course-rating">
+																	4.5
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star-half"></i>
+																</div>
+															</div>
+															<div class="course-meta-bot">
+																<ul>
+																	<li><i class="fa fa-user" aria-hidden="true"></i>
+																		<%= courses[i]?.user?.name %>
+																	</li>
+																	<li><i class="fa fa-users" aria-hidden="true"></i>
+																		56 Student</li>
+																	<li><i class="fa fa-book" aria-hidden="true"></i> 7
+																		Books</li>
+																</ul>
+															</div>
+														</div>
+													</div><!-- end col -->
+													<% } %>
+											</div><!-- end row -->
+										</div><!-- end col-lg-9 -->
+
+										<div class="col-lg-3" style="max-width: 135%;">
+											<div class="widget-categories">
+												<h3 class="widget-title text-center">Categories</h3>
+												<ul>
+													<% for(let i=0;i< categories.length; i++) { %>
+														<li><a href="/courses?categories=<%= categories[i].slug %>">
+																<%= categories[i].name %>
+															</a></li>
+														<% } %>
+												</ul>
+											</div>
+											<div class="widget-tags">
+												<h3 class="widget-title">Search Tags</h3>
+												<ul class="tags">
+													<li><a href="/courses"><b>Get All</b></a></li>
+														</b></a></li>
+													<% for(let i=0;i< categories.length; i++) { %>
+														<li><a href="/courses?categories=<%= categories[i].slug %>"><b><%= categories[i].name %></b></a></li>
+														</b></a></li>
+														<% } %>
+												</ul>
+											</div>
+										</div><!-- end col-lg-3 -->
+									</div><!-- end row -->
 			</div>
 
 		</div><!-- end section -->

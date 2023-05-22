@@ -1,0 +1,110 @@
+<%- include('partials/_header.ejs') -%>
+    <%- include('partials/_navigation.ejs') -%>
+        <% if(user) { %>
+
+
+            <div class="all-title-box">
+                <div class="container text-center">
+                    <h1>
+                        <%= user.name %><span class="m_1" style="text-transform: uppercase;">
+                                <%= user.role %>
+                            </span>
+                    </h1>
+                </div>
+            </div>
+            <% if(flashMessages) { %>
+                <% if(flashMessages.success) { %>
+
+                    <div class="alert alert-success">
+                        <%= flashMessages.success %>
+                    </div>
+                    <% } else if(flashMessages.error) { %>
+                        <div class="alert alert-danger">
+                            <%= flashMessages.error %>
+                        </div>
+                        <% } %>
+
+                            <% } %>
+                                <div id="overviews" class="section wb">
+                                    <div class="container">
+
+                                        <div class="section-title row text-center">
+
+                                        </div><!-- end title -->
+
+                                        <hr class="invis">
+
+                                        <div class="row">
+                                            <% if(user.role!='student' ) { %>
+                                                <div class="h-100 d-flex align-items-center justify-content-center mx-auto"
+                                                    style="margin-top: -6rem;">
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                        data-target="#addCourseModal">
+                                                        Create Course
+                                                    </button>
+                                                </div>
+
+                                                <% } %>
+
+
+                                        </div><!-- end row -->
+                                    </div><!-- end container -->
+                                </div><!-- end section -->
+                                <% if(user.role=='admin' ) { %>
+                                    <div class="container">
+                                        <h2>USERS</h2>
+
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">ID#</th>
+                                                    <th scope="col">Email</th>
+                                                    <th scope="col">Role</th>
+                                                    <th scope="col">..</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% for (let i=0; i< users.length; i++) { %>
+                                                    <tr>
+                                                        <th scope="row">
+                                                            <%=users[i]._id %>
+                                                        </th>
+                                                        <td>
+                                                            <%=users[i].email %>
+                                                        </td>
+                                                        <td>
+                                                            <%=users[i].role %>
+                                                        </td>
+                                                        <td>
+                                                            <div class="user-chat-nav d-inline action-btn">
+                                                                <div class="dropdown">
+                                                                    <button class="btn nav-btn dropdown-toggle"
+                                                                        type="button" data-toggle="dropdown"
+                                                                        aria-haspopup="true" aria-expanded="false">
+                                                                        <i class="bx bx-dots-horizontal-rounded"></i>
+                                                                    </button>
+                                                                    <div class="dropdown-menu dropdown-menu-end"
+                                                                        aria-labelledby="dropdownMenuButton">
+                                                                        <a type="button"
+                                                                        href="/user/<%= users[i]._id %>?_method=DELETE"
+                                                                        onclick="return confirm('ARE YOU SURE')"
+                                                                            class="dropdown-item mb-1 text-danger">
+                                                                            <i class="fa fa-trash"></i>
+                                                                            Delete
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                      
+                                                    </tr>
+
+
+                                                    <% } %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <% } %>
+                                        <% } %>
+
+                                            <%- include('partials/_footer.ejs') -%>

@@ -61,11 +61,11 @@ exports.getAllCourses = async (req, res) => {
         const categories = await Category.find()
 
 
-        res.status('200').render('course-grid-2', {
+        res.status('200').render('courses', {
             courses,
             categories,
             searchQuery,
-            page_name: 'course-grid-2'
+            page_name: 'courses'
         })
     } catch (error) {
         res.status('400').json({

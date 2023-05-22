@@ -28,7 +28,7 @@ app.set('view engine', 'ejs')
 //global variable
 
 global.userIn = null
-
+app.use('/stylesheets/fontawesome', express.static(__dirname + '/node_modules/@fortawesome/fontawesome-free/'));
 app.use(
     session({
         secret: 'my_keyboard_cat', // Buradaki texti değiştireceğiz.

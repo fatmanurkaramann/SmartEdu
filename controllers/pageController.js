@@ -1,9 +1,9 @@
 const nodemailer = require('nodemailer')
 const Course = require('../models/Course')
 const User = require('../models/User')
+const Category = require('../models/Category')
 
-
-exports.getHomePage = async(req, res) => {
+exports.getHomePage = async (req, res) => {
   const course = await Course.find().sort('-createdDate').limit(2)
   const totalCourse = await Course.find().countDocuments()
   const totalStudents = await User.countDocuments({ role: 'student' })
@@ -39,7 +39,43 @@ exports.getContactPage = (req, res) => {
     page_name: 'contact'
   })
 }
+exports.getPricingPage = (req, res) => {
+  res.render('pricing',
+    {
+      page_name: 'pricing'
+    })
+}
+exports.getCategoryPage = async (req, res) => {
+  try {
+    const categories = await Category.find()
+    const user = await User.findById(req.session.userId)
+    const users= await User.find()
+    res.render('category',
+      {
+        page_name: 'category',
+        categories,
+        user,
+        users
+      })
+  } catch (error) {
+    console.log(error)
+  }
 
+}
+exports.getUserPage=async(req,res)=>{
+try {
+  const user = await User.findById(req.session.userId)
+  const users= await User.find()
+  res.render('user',
+    {
+      page_name: 'user',
+      user,
+      users
+    })
+} catch (error) {
+  console.log(error)
+}
+}
 exports.sendEmail = async (req, res) => {
   const name = req.body.name;
   const email = req.body.email;

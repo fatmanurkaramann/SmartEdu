@@ -11,6 +11,9 @@ router.route('/').get(pageController.getHomePage)
 router.route('/about').get(pageController.getAboutPage)
 router.route('/contact').get(pageController.getContactPage)
 router.route('/contact').post(pageController.sendEmail)
+router.route('/pricing').get(pageController.getPricingPage)
+router.route('/category').get(pageController.getCategoryPage)
+router.route('/users').get(pageController.getUserPage)
 router.route('/register').post([
     check('name').notEmpty().withMessage('Please Enter Your Name'),
     check('email').isEmail().withMessage('Please Enter a Valid Email')
