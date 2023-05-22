@@ -28,10 +28,12 @@
                     </li>
                     <li class="nav-item dropdown  <%= page_name==='dashboard' && 'active' %>">
                         <a class="nav-link" href="/user/dashboard" id="dropdown-a">Dashboard </a>
+                        <% if(user && user.role=='admin' && userIn) { %>
                         <div class="dropdown-menu" aria-labelledby="dropdown-a">
                             <a class="dropdown-item <%= page_name==='blog-single' && 'active' %>" href="/users">Users</a>
                             <a class="dropdown-item <%= page_name==='blog-single' && 'active' %>" href="/category">Categories</a>
                         </div>
+                        <% } %>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="/pricing">Pricing</a></li>
                     <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>

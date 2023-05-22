@@ -14,6 +14,7 @@ const categoryRoute = require('./routes/categoryRoute')
 const userRoute = require('./routes/userRoute')
 const router = express.Router()
 const app = express()
+const User = require('./models/User')
 mongoose.connect('mongodb://localhost/smartedu-db', {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -28,6 +29,7 @@ app.set('view engine', 'ejs')
 //global variable
 
 global.userIn = null
+global.user=null
 app.use('/stylesheets/fontawesome', express.static(__dirname + '/node_modules/@fortawesome/fontawesome-free/'));
 app.use(
     session({
@@ -42,10 +44,12 @@ app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(fileUpload());
-app.use('*', (req, res, next) => {
+app.use('*', async (req, res, next) => {
     userIn = req.session.userId;
+    user = await User.findOne({ _id: req.session.userId })
     next();
 })
+
 app.use(
     methodOverride('_method', {
       methods: ['POST', 'GET'],
