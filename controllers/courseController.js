@@ -27,10 +27,7 @@ exports.createCourse = async (req, res) => {
         res.status('201').redirect('/courses')
     } catch (error) {
         console.log(error)
-        res.status('400').json({
-            status: 'fail',
-            error
-        })
+        res.render('error')
     }
 
 }

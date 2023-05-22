@@ -59,17 +59,23 @@ exports.logoutUser = (req, res) => {
 }
 
 exports.getDashboardPage = async (req, res) => {
-    const user = await User.findOne({ _id: req.session.userId }).populate('courses')
-    const categories = await Category.find()
-    const users = await User.find()
-    const courses = await Course.find({ user: req.session.userId })
-    res.status(200).render('dashboard', {
-        page_name: 'dashboard',
-        user,
-        categories,
-        courses,
-        users
-    })
+    try {
+        const user = await User.findOne({ _id: req.session.userId }).populate('courses')
+        const categories = await Category.find()
+        const users = await User.find()
+        const courses = await Course.find({ user: req.session.userId })
+        res.status(200).render('dashboard', {
+            page_name: 'dashboard',
+            user,
+            categories,
+            courses,
+            users
+        })
+    } catch (error) {
+        console.log(error)
+        res.render('error')
+    }
+  
 }
 
 exports.deleteUser = async (req, res) => {
